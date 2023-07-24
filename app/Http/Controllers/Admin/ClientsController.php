@@ -14,49 +14,33 @@ class ClientsController extends Controller
     return view('admin.clients.index');
    }
 
-   public function create()
-   {
-    return view('admin.clients.create');
-   }
+   // public function edit(Clients $clients) 
+   // {
+   //    return view('admin.clients.edit',compact('clients'));
+   // }
 
-   public function store(ClientsFormRequest $request)
-   {
-       $validatedData = $request->validated();
-
-       $clients = new Clients;
-       $clients->nom = $validatedData['nom'];
-       $clients->description = $validatedData['description'];
-       $clients->statut = "Stand-by";
-       $clients->date_debut = $validatedData['date_debut'];
-       $clients->date_fin = $validatedData['date_fin'];
-       $clients->save();
-
-       return redirect('admin/clients')->with('message' , 'Tasks Added Successfully');
-
-   }
-   public function edit(Clients $clients) 
-   {
-      return view('admin.clients.edit',compact('clients'));
-   }
-
-   public function view(Clients $clients) 
-   {
-      return view('admin.clients.view',compact('clients'));
-   }
-
-   public function  update(ClientsFormRequest $request , $clients)
+ 
+  
+   public function  update()
    {
     
-    $validatedData = $request->validated();
+      $this->validate([
+         'nom'=>'required',
+         'description'=>'required',
+         'date_debut'=>'required',
+         'date_fin'=>'required',
+       
+        ]);
 
     $clients =Clients::findOrFail($clients);
     
    
-    $clients->nom = $validatedData['nom'];
-    $clients->description = $validatedData['description'];
+    $clients = new Clients;
+    $clients->nom = $this->nom;
+    $clients->description = $this->description;
     $clients->statut = "Stand-by";
-    $clients->date_debut = $validatedData['date_debut'];
-    $clients->date_fin = $validatedData['date_fin'];
+    $clients->date_debut = $this->date_debut;
+    $clients->date_fin = $this->date_fin;
     $clients->update();
 
     return redirect('admin/clients')->with('message' , 'Tasks  Update Successfully');

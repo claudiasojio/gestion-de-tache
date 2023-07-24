@@ -1,13 +1,19 @@
 <div>
 
     @include('livewire.admin.clients.delete')
+    @include('livewire.admin.clients.create')
+    @include('livewire.admin.clients.view')
+    @include('livewire.admin.clients.edit')
 
     @if (session('message'))
         <h1 class="alert alert-success">{{ session('message') }},</h1>
     @endif
     <div class="card-header">
         <h3>Tasks Save: {{ $clientss->count() }}
-            <a href="{{ url('admin/clients/create') }}" class="btn btn-primary btn-sm float-right">Add Tasks</a>
+            <button type="button" class="btn btn-primary btn-sm float-right " data-bs-toggle="modal" data-bs-target="#createModal">
+                Add Tasks
+              </button>
+              
         </h3>
     </div>
 
@@ -49,25 +55,28 @@
                                         <td>{{ $clients->date_debut }}</td>
                                         <td>{{ $clients->date_fin }}</td>
                                         <td class="col-md-3">
-                                            <a href="{{ url('admin/clients/' . $clients->id . '/view') }}"
-                                                class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ url('admin/clients/' . $clients->id . '/edit') }}"
-                                                class="btn  btn-sm btn-success">Edit</a>
+                                            <button type="button" wire:click="initData( {{ $clients->id }} )" class="btn btn-info " data-bs-toggle="modal" data-bs-target="#viewModal">
+                                                View
+                                                </button>
+                                              
+                                                <button type="button" wire:click="edit( {{ $clients->id }} )" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#editModal">
+                                                 Edit
+                                                    </button>
                                             <a href="#"
                                                 wire:click="deleteClients( {{ $clients->id }} ) "data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal" class="btn  btn-sm btn-danger">Delete</a>
                                             {{-- <a href="{{ terminer('admin/clients/terminer' . $clients->id ) }}"
                                                     class="btn  btn-sm btn-primary">Terminer</a> --}}
                                             <br>
-                                            @if ($clients->statut == 'Stand-by')
+                                 
+                                            <a href="/En_cours/{{ $clients->id }}"
+                                                class=" my-2 btn  btn-sm btn-secondary">Pending</a>
+
+                                                @if ($clients->statut == 'Stand-by')
                                                 <a href="{{ route('terminer', $clients->id) }}" class="btn  my-2  btn-sm btn-primary">Finish</a>
                                             @elseif ($clients->statut == 'Pending...')
                                             <a href="{{ route ('terminer', $clients->id) }}" class=" my-2 btn  btn-sm btn-primary">Finish</a>
                                             @endif
-                                            
-                                            
-                                            <a href="/En_cours/{{ $clients->id }}"
-                                                class=" my-2 btn  btn-sm btn-secondary">Pending</a>
                                         </td>
                                     </tr>
 

@@ -31,11 +31,11 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function() {
     // Clients Route
     Route::controller(ClientsController::class)->group(function () {
         Route::get('/clients', 'index')->name('clientss');
-        Route::get('/clients/create', 'create');
+        // Route::get('/clients/create', 'create');
         Route::post('/clients', 'store');
-        Route::get('/clients/{clients}/edit', 'edit');
-        Route::put('/clients/{clients}', 'update');
-        Route::get('/clients/{clients}/view', 'view');
+        // Route::get('/clients/{clients}/edit', 'edit');
+        // Route::put('/clients/{clients}', 'update');
+        // Route::get('/clients/{clients}/view', 'view');
         // Route::get('/clients/terminer/{clients}','terminer');
     });
    
