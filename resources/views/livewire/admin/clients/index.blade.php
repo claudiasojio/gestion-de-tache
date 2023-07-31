@@ -29,6 +29,12 @@
                         $terminer = 0;
                         
                         $ide = 0;
+
+                        $pourcentageStand = 0;
+
+                        $pourcentagePending = 0;
+
+                        $pourcentageTerminer = 0;
                         
                     @endphp
                     <div class="card-body">
@@ -109,7 +115,7 @@
                                     @endphp
                                 @endforeach
 
-                                <div class="float-end">
+                                <div class="float-right">
                                     <p> Number of tasks satnd-by:  {{ $stand }}</p>
 
                                     <p> Number of tasks pending :  {{ $encours }}</p>

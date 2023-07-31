@@ -40,7 +40,7 @@ class Index extends Component
        $clients->date_fin = $this->date_fin;
        $clients->save();
 
-       return redirect('')->with('message' , 'Tasks Added Successfully');
+       return redirect('admin/clients')->with('message' , 'Tasks Added Successfully');
 
    }
    public function edit($id){
